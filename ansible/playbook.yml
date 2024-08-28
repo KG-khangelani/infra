@@ -1,0 +1,27 @@
+- name: Setup common tools
+  hosts: all
+  become: yes
+  become_method: "ansible.builtin.sudo"
+  tasks:
+    - name: Read Debian machine IP from openTofu outputs
+      command: cat ~/infra/ansible/infra_outputs.txt | grep kali_omen_ip | awk '{print $3}'
+      register: kali_omen_ip
+
+    - name: Use Debian machine IP in tasks
+¨   debug:
+       msg: "Debian machine IP is {{ kali_omen_ip.stdout }}"
+
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install common tools
+      apt:
+        name:
+          - git
+          - curl
+          - vim
+          - htop
+        state: present
+

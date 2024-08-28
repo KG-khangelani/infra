@@ -1,0 +1,9 @@
+kali_omen = <<EOT
+Physical Machine: Kali Omen
+IP: 192.168.101.242
+OS: Kali Linux
+Memory: 8GB
+storage: 1TB HDD
+
+EOT
+kali_omen_ip = "192.168.101.242"
